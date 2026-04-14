@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pizza_menu/menu_item.dart';
+import 'package:pizza_menu/pizza_data.dart';
 
 class MenuPage extends StatelessWidget {
   const MenuPage({super.key});
@@ -9,25 +11,33 @@ class MenuPage extends StatelessWidget {
       appBar: AppBar(title: Text("Pizza Menu")),
       body: Column(
         children: [
-          Card(
-            child: Row(
-              children: [
-                Image.asset("images/salamino.jpg", width: 100, height: 100, fit: BoxFit.cover,),
-                Expanded(child: Column(
-                  children: [
-                    Text("Pizza Salamino", style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 10,
-                    ),),
-                    Text("Tomato, mozarella"),
-                    Text("\$12"),
-                  ],
-                ),),
-              ],
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(children: listMenuItems()),
             ),
-          )
+          ),
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.all(20),
+                  backgroundColor: Colors.yellow,
+                ),
+                onPressed: () {}, child: Text('Order Now')),
+            ),
+          ),
         ],
       ),
-      );
+    );
+  }
+
+  List<Widget> listMenuItems() {
+    List<MenuItem> items = [];
+    for (Pizza pizza in pizzaData) {
+      items.add(MenuItem(pizza));
+    }
+    return items;
   }
 }
