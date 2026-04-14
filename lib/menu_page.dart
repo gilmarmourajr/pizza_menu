@@ -16,6 +16,7 @@ class MenuPage extends StatelessWidget {
               child: Column(children: listMenuItems()),
             ),
           ),
+          if(isOpen())
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: SizedBox(
@@ -39,5 +40,13 @@ class MenuPage extends StatelessWidget {
       items.add(MenuItem(pizza));
     }
     return items;
+  }
+
+  bool isOpen() {
+    var horaInicio = 19;
+    var horaFim = 23;
+    var horaAtual = DateTime.now().hour;
+
+    return horaAtual >= horaInicio && horaAtual < horaFim;
   }
 }
